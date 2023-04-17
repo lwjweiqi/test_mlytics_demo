@@ -38,3 +38,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation 'io.github.vip-test:test-demo:1.0.0'
 }
+
+configurations.all {
+    exclude group: "com.google.protobuf", module: "protobuf-javalite"
+}
