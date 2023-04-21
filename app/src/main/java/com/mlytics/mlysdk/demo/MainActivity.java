@@ -19,6 +19,7 @@ import kotlin.jvm.functions.Function1;
 public class MainActivity extends AppCompatActivity {
     private StyledPlayerView playerView = null;
     private AppCompatButton playButton = null;
+    private AppCompatButton pauseButton = null;
 
     String clientId = "cegh8d9j11u91ba1u600";
     String url = "https://vsp-stream.s3.ap-northeast-1.amazonaws.com/HLS/raw/SpaceX.m3u8";
@@ -52,6 +53,14 @@ public class MainActivity extends AppCompatActivity {
                 player.setPlayWhenReady(true);
                 player.prepare();
                 player.play();
+            }
+        });
+
+        pauseButton = findViewById(R.id.pauseButton);
+        pauseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                player.pause();;
             }
         });
     }
