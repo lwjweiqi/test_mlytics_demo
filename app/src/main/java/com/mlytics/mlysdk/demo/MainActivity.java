@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton pauseButton = null;
 
     String clientId = "cegh8d9j11u91ba1u600";
+    String server = "vsp.mlytics.com";
     String url = "https://vsp-stream.s3.ap-northeast-1.amazonaws.com/HLS/raw/SpaceX.m3u8";
 
     @Override
@@ -31,15 +32,16 @@ public class MainActivity extends AppCompatActivity {
 
         playerView = findViewById(R.id.player_view);
 
-        MLYDriver.INSTANCE.initialize(new Function1<MLYDriverOptions, Unit>() {
+        MLYDriver.INSTANCE.initialize(this.getApplicationContext(),new Function1<MLYDriverOptions, Unit>() {
             @Override
             public Unit invoke(MLYDriverOptions options) {
                 options.getClient().setId(clientId);
+                options.getServer().setFqdn(server);
                 return null;
             }
         });
 
-        ExoPlayer player = MLYExoPlayer.Companion.buildLowLatencyPlayer(playerView,3000);
+        ExoPlayer player = MLYExoPlayer.Companion.buildPlayer(playerView,0);
 
         playerView.setPlayer(player);
 
