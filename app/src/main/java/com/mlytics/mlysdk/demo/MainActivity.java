@@ -21,10 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton playButton = null;
     private AppCompatButton pauseButton = null;
 
-    String clientId = "cegh8d9j11u91ba1u600";
-    String server = "vsp.mlytics.com";
-    String url = "https://vsp-stream.s3.ap-northeast-1.amazonaws.com/HLS/raw/SpaceX.m3u8";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,17 +31,16 @@ public class MainActivity extends AppCompatActivity {
         MLYDriver.INSTANCE.initialize(this.getApplicationContext(),new Function1<MLYDriverOptions, Unit>() {
             @Override
             public Unit invoke(MLYDriverOptions options) {
-                options.getClient().setId(clientId);
-                options.getServer().setFqdn(server);
+                options.getClient().setId("cegh8d9j11u91ba1u600");
                 return null;
             }
         });
 
-        ExoPlayer player = MLYExoPlayer.Companion.buildPlayer(playerView,0);
+        ExoPlayer player = MLYExoPlayer.Companion.build(playerView);
 
         playerView.setPlayer(player);
 
-        player.setMediaItem(MediaItem.fromUri(url));
+        player.setMediaItem(MediaItem.fromUri("https://vsp-stream.s3.ap-northeast-1.amazonaws.com/HLS/raw/SpaceX.m3u8"));
 
         playButton = findViewById(R.id.playButton);
         playButton.setOnClickListener(new View.OnClickListener() {
